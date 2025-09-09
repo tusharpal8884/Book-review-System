@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Admin</title></head>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<body>
+  <h2>Admin Dashboard</h2>
+
+  <h3>Create Post</h3>
+  <form method="post" action="/admin/post">
+    <input name="title" placeholder="Title" required><br>
+    <input name="author" placeholder="Author" required><br>
+    <textarea name="body" rows="6" cols="60" placeholder="Body" required></textarea><br>
+    <button>Create</button>
+  </form>
+
+  <h3>All Posts</h3>
+  <ul>
+    <% posts.forEach(p => { %>
+      <li><a href="/post/<%= p._id %>"><%= p.title %></a></li>
+    <% }) %>
+  </ul>
+
+  <h3>Pending Reviews</h3>
+  <ul>
+    <% pending.forEach(r => { %>
+      <li>
+        <strong><%= r.name %></strong> (⭐ <%= r.rating %>) on <%= r.postId %><br>
+        <pre><%= r.text %></pre>
+        <form style="display:inline" method="post" action="/admin/review/<%= r._id %>/approve"><button>Approve</button></form>
+        <form style="display:inline" method="post" action="/admin/review/<%= r._id %>/reject"><button>Reject</button></form>
+      </li>
+    <% }) %>
+  </ul>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Book Reviews</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- fonts + css -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="/">
+        <span class="brand-logo"></span>
+        <span>Bookverse</span>
+      </a>
+      <div><a class="btn outline" href="/admin/login">Admin</a></div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <section class="hero fade-up">
+      <img class="hero-img" src="/images/hero.jpg" alt="Books">
+      <div class="hero-content">
+        <div>
+          <h1>Fresh takes on books people love</h1>
+          <p>Discover new reads and add your own reviews.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid fade-up">
+      <% posts.forEach(p => { %>
+        <article class="card">
+          <div class="badge">New</div>
+          <h3><%= p.title %></h3>
+          <div class="meta">by <strong><%= p.author %></strong> · <%= new Date(p.createdAt).toDateString() %></div>
+          <p class="body"><%= (p.body || '').slice(0, 160) %>…</p>
+          <div class="actions">
+            <a class="btn" href="/post/<%= p._id %>">Read & Review</a>
+          </div>
+        </article>
+      <% }) %>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">© <%= new Date().getFullYear() %> Bookverse • Built with EJS</div>
+  </footer>
+</body>
+</html>

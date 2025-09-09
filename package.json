@@ -1,0 +1,21 @@
+{
+  "name": "book-review-blog",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "vercel dev"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.17.3",
+    "mongodb": "6.9",
+    "mongoose": "8.6",
+    "morgan": "^1.10.0",
+    "serverless-http": "^3.2.0"
+  }
+}
+

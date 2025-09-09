@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title><%= post.title %> — Bookverse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="/"><span class="brand-logo"></span><span>Bookverse</span></a>
+      <a class="btn outline" href="/admin">Admin</a>
+    </div>
+  </nav>
+
+  <main class="container post fade-up">
+    <article class="post-article">
+      <h1><%= post.title %></h1>
+      <p class="meta">by <strong><%= post.author %></strong> · <%= new Date(post.createdAt).toDateString() %></p>
+      <div class="body"><%= post.body %></div>
+
+      <% if (info) { %><div class="info"><%= info %></div><% } %>
+    </article>
+
+    <aside class="sidebar">
+      <section class="widget">
+        <h3>Reviews</h3>
+        <% if (reviews.length === 0) { %>
+          <p class="help">No reviews yet. Be the first!</p>
+        <% } %>
+        <% reviews.forEach(r => { %>
+          <div class="review">
+            <div class="name"><%= r.name %></div>
+            <div class="stars" aria-label="rating">
+              <% for (let i=1;i<=5;i++){ %>
+                <span class="star <%= i <= (r.rating||0) ? '' : 'dim' %>"></span>
+              <% } %>
+            </div>
+            <div class="text"><%= r.text %></div>
+          </div>
+        <% }) %>
+      </section>
+
+      <section class="widget">
+        <h3>Add your review</h3>
+        <form method="post" action="/post/<%= post._id %>/review" class="form">
+          <input class="input" name="name" placeholder="Your name" required>
+          <select class="select" name="rating" required>
+            <option value="5">★★★★★ (5)</option>
+            <option value="4">★★★★☆ (4)</option>
+            <option value="3">★★★☆☆ (3)</option>
+            <option value="2">★★☆☆☆ (2)</option>
+            <option value="1">★☆☆☆☆ (1)</option>
+          </select>
+          <textarea class="textarea" name="text" placeholder="Write something helpful…" required></textarea>
+          <button class="btn" type="submit">Submit review</button>
+        </form>
+      </section>
+    </aside>
+  </main>
+
+  <footer class="footer"><div class="container">© <%= new Date().getFullYear() %> Bookverse</div></footer>
+</body>
+</html>
